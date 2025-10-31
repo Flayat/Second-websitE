@@ -232,16 +232,11 @@
             box-shadow: var(--shadow-lg);
         }
         
-        .hero-image-placeholder {
-            background-color: white;
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             border-radius: 1.5rem;
-            width: 90%;
-            height: 85%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--gray-600);
         }
         
         /* Section Styles */
@@ -354,6 +349,12 @@
             justify-content: center;
             color: var(--gray-600);
             font-weight: 600;
+        }
+        
+        .machine-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         .machine-info {
@@ -496,9 +497,15 @@
         
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-bottom: 2rem;
+        }
+        
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            min-height: 180px;
         }
         
         .footer-logo {
@@ -522,6 +529,7 @@
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
+            margin-top: auto;
         }
         
         .contact-item {
@@ -539,7 +547,8 @@
             height: 14px;
         }
         
-        .footer-links h4 {
+        .footer-links h4,
+        .footer-contact h4 {
             font-size: 1.125rem;
             margin-bottom: 1rem;
             color: white;
@@ -609,6 +618,10 @@
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
+            
+            .footer-column {
+                min-height: auto;
+            }
         }
         
         @media (max-width: 480px) {
@@ -629,7 +642,7 @@
             }
         }
         
-        /* Floating CTA */
+        /* Floating CTA - Animated */
         .floating-cta {
             position: fixed;
             bottom: 2rem;
@@ -646,12 +659,29 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            animation: pulse 2s infinite;
             transition: all 0.3s ease;
         }
         
         .floating-cta:hover {
             background: var(--primary-dark);
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.05);
+            animation: none;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: translateY(0) scale(1);
+                box-shadow: 0 4px 6px -1px rgba(34, 197, 94, 0.3), 0 2px 4px -1px rgba(34, 197, 94, 0.2);
+            }
+            50% {
+                transform: translateY(-5px) scale(1.02);
+                box-shadow: 0 12px 15px -3px rgba(34, 197, 94, 0.4), 0 6px 8px -2px rgba(34, 197, 94, 0.3);
+            }
+            100% {
+                transform: translateY(0) scale(1);
+                box-shadow: 0 4px 6px -1px rgba(34, 197, 94, 0.3), 0 2px 4px -1px rgba(34, 197, 94, 0.2);
+            }
         }
         
         .floating-cta svg {
@@ -695,9 +725,7 @@
                 </div>
             </div>
             <div class="hero-image">
-                <div class="hero-image-placeholder">
-                    Smart Vending Machine Display
-                </div>
+                <img src="images/vending-machine-customers.png" alt="Man and woman selecting snacks from a modern vending machine" style="width:100%; max-width:600px; height:auto; border: radius 1.5rem;;">
             </div>
         </div>
     </section>
@@ -751,7 +779,7 @@
             <div class="machines-grid">
                 <div class="machine-card">
                     <div class="machine-image">
-                        Healthy Food Vending Machine
+                        <img src="images/health vending machine.png" alt="Modern healty Food vending machine" style="width:100%; max-width:600px; height:auto;">
                     </div>
                     <div class="machine-info">
                         <h3>Healthy Food Machine</h3>
@@ -760,7 +788,7 @@
                 </div>
                 <div class="machine-card">
                     <div class="machine-image">
-                        Beverage Vending Machine
+                        <img src="images/health vendi.png" alt="Modern Beverage vending machine" style="width:100%; max-width:600px; height:auto;">
                     </div>
                     <div class="machine-info">
                         <h3>Premium Beverage Machine</h3>
@@ -769,7 +797,7 @@
                 </div>
                 <div class="machine-card">
                     <div class="machine-image">
-                        Combo Vending Machine
+                        <img src="images/combo-vending-machines.jpg" alt="Modern Combo vending machine" style="width:100%; max-width:600px; height:auto;">
                     </div>
                     <div class="machine-info">
                         <h3>Combo Machine</h3>
@@ -873,11 +901,11 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-about">
+                <div class="footer-column footer-about">
                     <div class="footer-logo">FLAYAT <span>ONE</span></div>
                     <p>Premium smart vending machine placement services serving the Dallas-Fort Worth metroplex. We partner with businesses to provide convenient, healthy vending solutions that generate revenue and enhance customer experience.</p>
                 </div>
-                <div class="footer-links">
+                <div class="footer-column footer-links">
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="#value">Why Choose Us</a></li>
@@ -886,7 +914,7 @@
                         <li><a href="#contact">Contact Us</a></li>
                     </ul>
                 </div>
-                <div class="footer-contact">
+                <div class="footer-column footer-contact">
                     <h4>Contact Info</h4>
                     <div class="contact-info">
                         <div class="contact-item">

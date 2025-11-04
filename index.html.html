@@ -10,7 +10,7 @@
     <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
-
+    
     <!-- Schema.org markup for Google -->
     <script type="application/ld+json">
     {
@@ -509,7 +509,6 @@
         .footer-column {
             display: flex;
             flex-direction: column;
-            min-height: 180px;
         }
         
         .footer-logo {
@@ -533,7 +532,6 @@
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
-            margin-top: auto;
         }
         
         .contact-item {
@@ -621,10 +619,6 @@
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
-            }
-            
-            .footer-column {
-                min-height: auto;
             }
         }
         
@@ -857,7 +851,7 @@
                 <p>Request a free consultation and site assessment for your Dallas-area business</p>
             </div>
             <div class="form-container">
-                <form id="placementForm">
+                <form action="https://formspree.io/f/mjkpapzy" method="POST">
                     <div class="form-group">
                         <label for="name">Full Name</label>
                         <input type="text" id="name" name="name" required placeholder="John Smith">
@@ -964,12 +958,40 @@
             });
         });
 
-        // Form submission handling
-        document.getElementById('placementForm').addEventListener('submit', function(e) {
+        // Form submission success handling
+        document.querySelector('form').addEventListener('submit', function(e) {
             e.preventDefault();
-            // In a real implementation, you would send this data to your server
-            alert('Thank you for your request! We will contact you within 24 hours to discuss your vending machine placement needs.');
-            this.reset();
+            
+            // Show loading state
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            // Submit form via fetch to handle response properly
+            fetch(this.action, {
+                method: this.method,
+                body: new FormData(this),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Thank you for your request! We will contact you within 24 hours to discuss your vending machine placement needs.');
+                    this.reset();
+                } else {
+                    alert('There was an error sending your message. Please try again or contact us directly at contact@flayatone.com');
+                }
+            })
+            .catch(error => {
+                alert('There was an error sending your message. Please try again or contact us directly at contact@flayatone.com');
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
         });
 
         // Header scroll effect
